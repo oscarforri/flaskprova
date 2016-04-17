@@ -1,15 +1,16 @@
 import sys
 import sqlite3
+from flask import Flask
 from flask import render_template
 #from flask import Flask, redirect, url_for, request
 #from datetime import datetime, date
 
-app = Flas(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
-#    return render_template('index.html')
-    return "index"
+    return render_template('index.html')
+    #return "index"
 
 @app.route('/insert_user')
 def insert_user():
