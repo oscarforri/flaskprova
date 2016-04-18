@@ -30,12 +30,11 @@ def save_data(username,fullname,email,password):
 @app.route('/')
 def index():
     return render_template('index.html')
-    #return "index"
 
 @app.route('/insert_user')
 def insert_user():
-#    return render_template('insert_user_form.html')
-    return "insert_user"
+    return render_template('insert_user_form.html')
+    
 
 @app.route('/show_users')
 def show_users():
