@@ -6,6 +6,27 @@ from datetime import datetime, date
 
 app = Flask(__name__)
 
+def get_data():
+    conn = sqlite3.connect('mydatabase.db')
+    cursor = conn.execute("SELECT username,fullname,email,password from allusers")
+    data = [row for row in cursor]
+    conn.close()
+    return data
+
+def save_data(username,fullname,email,password):
+    conn = sqlite3.connect('mydatabase.db')
+    try:
+        conn.execute("insert into allusers (username,fullname,email,password) values (?, ?, ?, ?)",
+                 (username,
+                  fullname,
+                  email,
+                  password))
+        conn.commit()
+        conn.close()
+        return True
+    except:
+        return False
+
 @app.route('/')
 def index():
     return render_template('index.html')
