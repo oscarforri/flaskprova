@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Login Form</title>
+  </head>
+  <body>
+    <h2>Login with a registered user: </h2>
+    <table border="1">
+      <tr>
+        <th>username</th>
+        <th>fullname</th>
+        <th>email</th>
+        <th>password</th>
+      </tr>
+        {% for row in data %}
+          <tr>
+            {% for cell in row %}
+            <td> {{cell}} </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+    </table>
+
+  </body>
+</html>

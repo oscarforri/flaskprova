@@ -34,17 +34,17 @@ def index():
 @app.route('/insert_user')
 def insert_user():
     return render_template('insert_user_form.html')
-    
+
 
 @app.route('/show_users')
 def show_users():
-#    return render_template('show_users_table.html')
-    return "show_users"
+    data = get_data
+    return render_template('show_user_table.html', data = data)
 
 @app.route('/login')
 def login():
-#    return render_template('login_form.html')
-    return "login"
+    return render_template('login_form.html')
+
 
 if __name__ == '__main__':
     app.debug = True
