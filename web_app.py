@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 def get_data():
     conn = sqlite3.connect('mydatabase.db')
+    #return hola
     cursor = conn.execute("SELECT username,fullname,email,password FROM allusers")
     data = [row for row in cursor]
     conn.close()
@@ -45,8 +46,8 @@ def insert_user():
 
 @app.route('/show_users')
 def show_users():
-    data = get_data
-    return render_template('show_user_table.html', data = data)
+    historical_data = get_data
+    return render_template('show_user_table.html',historical_data=historical_data)
 
 @app.route('/login')
 def login():
