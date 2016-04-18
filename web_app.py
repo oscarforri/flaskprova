@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 def get_data():
     conn = sqlite3.connect('mydatabase.db')
-    cursor = conn.execute("SELECT username,fullname,email,password from allusers")
+    cursor = conn.execute("SELECT username,fullname,email,password FROM allusers")
     data = [row for row in cursor]
     conn.close()
     return data
@@ -31,10 +31,17 @@ def save_data(username,fullname,email,password):
 def index():
     return render_template('index.html')
 
-@app.route('/insert_user')
+@app.route('/insert_user', methods=['GET','POST'])
 def insert_user():
-    return render_template('insert_user_form.html')
-
+    if request.method == 'GET':
+        return render_template('insert_user_form.html')
+    elif request.method == 'POST':
+	username = request.form.get('username')
+	fullname = request.form.get('fullname')
+	email = request.form.get('email')
+	password = request.form.get('password')
+        save_data(username,fullname,email,password)
+	return "hola"
 
 @app.route('/show_users')
 def show_users():
