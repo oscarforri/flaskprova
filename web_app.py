@@ -46,7 +46,7 @@ def insert_user():
 
 @app.route('/show_users')
 def show_users():
-    historical_data = get_data
+    historical_data = get_data()
     return render_template('show_user_table.html',historical_data=historical_data)
 
 @app.route('/login')
