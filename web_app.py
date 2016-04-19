@@ -42,7 +42,7 @@ def insert_user():
 	email = request.form.get('email')
 	password = request.form.get('password')
         save_data(username,fullname,email,password)
-	return "hola"
+	return render_template('registered_correctly.html')
 
 @app.route('/show_users')
 def show_users():
@@ -63,7 +63,7 @@ def login():
                 return "login correctly!"
                 break
         return "login errror!!"
-        
+
 
 if __name__ == '__main__':
     app.debug = True
