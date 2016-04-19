@@ -16,17 +16,13 @@ def get_data():
 
 def save_data(username,fullname,email,password):
     conn = sqlite3.connect('mydatabase.db')
-    try:
-        conn.execute("insert into allusers (username,fullname,email,password) values (?, ?, ?, ?)",
+    conn.execute("insert into allusers (username,fullname,email,password) values (?, ?, ?, ?)",
                  (username,
                   fullname,
                   email,
                   password))
-        conn.commit()
-        conn.close()
-        return True
-    except:
-        return False
+    conn.commit()
+    conn.close()
 
 @app.route('/')
 def index():
