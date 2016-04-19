@@ -59,10 +59,11 @@ def login():
         data = get_data()
         for info in data:
             (username,fullname,email,password) = info
-            if (user_login == username and pass_login == password):
+            if (username == user_login and password == pass_login):
                 return "login correctly!"
-            else:
-                return "login error"
+                break
+        return "login errror!!"
+        
 
 if __name__ == '__main__':
     app.debug = True
