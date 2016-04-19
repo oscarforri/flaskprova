@@ -34,15 +34,15 @@ def index():
 
 @app.route('/insert_user', methods=['GET','POST'])
 def insert_user():
-    if request.method == 'GET':
-        return render_template('insert_user_form.html')
-    elif request.method == 'POST':
-	    username = request.form.get('username')
-	    fullname = request.form.get('fullname')
-	    email = request.form.get('email')
-	    password = request.form.get('password')
-          save_data(username,fullname,email,password)
-	    return "hola"
+ if request.method == 'GET':
+          return render_template('insert_user_form.html')
+ elif request.method == 'POST':
+ 	username = request.form.get('username')
+	fullname = request.form.get('fullname')
+	email = request.form.get('email')
+	password = request.form.get('password')
+        save_data(username,fullname,email,password)
+	return "hola"
 
 @app.route('/show_users')
 def show_users():
@@ -61,7 +61,7 @@ def login():
             (username,fullname,email,password) = info
             if (user_login == username and pass_login == password):
                 return "login correctly!"
-            else
+            else:
                 return "login error"
 
 if __name__ == '__main__':
