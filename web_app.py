@@ -60,9 +60,9 @@ def login():
         for info in data:
             (username,fullname,email,password) = info
             if (username == user_login and password == pass_login):
-                return "login correctly!"
+                return render_template('login_correctly.html')
                 break
-        return "login errror!!"
+        return render_template('login_error.html')
 
 
 if __name__ == '__main__':
