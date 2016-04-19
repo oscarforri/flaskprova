@@ -37,22 +37,32 @@ def insert_user():
     if request.method == 'GET':
         return render_template('insert_user_form.html')
     elif request.method == 'POST':
-	username = request.form.get('username')
-	fullname = request.form.get('fullname')
-	email = request.form.get('email')
-	password = request.form.get('password')
-        save_data(username,fullname,email,password)
-	return "hola"
+	    username = request.form.get('username')
+	    fullname = request.form.get('fullname')
+	    email = request.form.get('email')
+	    password = request.form.get('password')
+          save_data(username,fullname,email,password)
+	    return "hola"
 
 @app.route('/show_users')
 def show_users():
-    historical_data = get_data()
-    return render_template('show_user_table.html',historical_data=historical_data)
+    data = get_data()
+    return render_template('show_user_table.html',data=data)
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
-    return render_template('login_form.html')
-
+    if request.method == 'GET':
+        return render_template('login_form.html')
+    elif request.method == 'POST':
+        user_login = request.form.get('username')
+        pass_login = request.form.get('password')
+        data = get_data()
+        for info in data:
+            (username,fullname,email,password) = info
+            if (user_login == username and pass_login == password):
+                return "login correctly!"
+            else
+                return "login error"
 
 if __name__ == '__main__':
     app.debug = True
