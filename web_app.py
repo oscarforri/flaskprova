@@ -6,7 +6,7 @@ from flask import render_template
 app = Flask(__name__)
 
 #Function to get data from database.
-def get_data():
+def get_user():
     conn = sqlite3.connect('mydatabase.db')
     cursor = conn.execute("SELECT username,fullname,email,password FROM allusers")
     data = [row for row in cursor]
@@ -14,7 +14,7 @@ def get_data():
     return data
 
 #Function to connect with the database and insert the new registers.
-def save_data(username,fullname,email,password):
+def save_user(username,fullname,email,password):
     conn = sqlite3.connect('mydatabase.db')
     conn.execute("insert into allusers (username,fullname,email,password) values (?, ?, ?, ?)",
                  (username,
@@ -39,14 +39,14 @@ def insert_user():
 	fullname = request.form.get('fullname')
 	email = request.form.get('email')
 	password = request.form.get('password')
-        save_data(username,fullname,email,password)
+        save_user(username,fullname,email,password)
 	return render_template('registered_correctly.html')
 
 #Shows information of all users that are registered in our database.
 @app.route('/show_users')
 def show_users():
-    data = get_data()
-    return render_template('show_user_table.html',data=data)
+    data = get_user()
+    return render_template('show_user_table.html', data=data)
 
 #Login Form to enter to private content.
 @app.route('/login', methods=['GET','POST'])
@@ -56,7 +56,7 @@ def login():
     elif request.method == 'POST':
         user_login = request.form.get('username')			#User from web
         pass_login = request.form.get('password')			#Pass from web
-        data = get_data()						#Get all the content of the database
+        data = get_user()						#Get all the content of the database
         for info in data:						#Iterate "usercontent" for "usercontent" to all the database content
             (username,fullname,email,password) = info			
             if (username == user_login and password == pass_login):	#If the user and pass from the web matches with one "usercontent" of the database:
