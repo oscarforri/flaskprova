@@ -58,7 +58,7 @@ def login():
         pass_login = request.form.get('password')			#Pass from web
         data = get_user()						#Get all the content of the database
         for info in data:						#Iterate "usercontent" for "usercontent" to all the database content
-            (username,fullname,email,password) = info			
+            (username,fullname,email,password) = info
             if (username == user_login and password == pass_login):	#If the user and pass from the web matches with one "usercontent" of the database:
                 return render_template('login_correctly.html')			#Call login_correctly.html
                 break

@@ -12,6 +12,15 @@ class User(Base):
     email = Column(String)
     password = Column(String)
 
+    def __init__(self, username, fullname, email, password):
+        self.username = username
+        self.fullname = fullname
+        self.email = email
+        self.password = password
+
     def __repr__(self):
         return "<User(username='%s', fullname='%s', email='%s' password='%s')>" % (
                         self.username, self.fullname, self.email, self.password)
+
+engine = create_engine('sqlite:///sqlalchemy_users.db')
+Base.metadata.create_all(engine)
