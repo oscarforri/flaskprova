@@ -11,8 +11,13 @@ def get_userORM():
     engine = create_engine('sqlite:///sqlalchemy_users.db', echo=True)
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
-    user = session.query(User).all()
-    return user
+    a = session.query(User.username.label('username_label')).all()
+    b = session.query(User.fullname.label('fullname_label')).all()
+    c = session.query(User.email.label('e_label')).all()
+    d = session.query(User.username, User.fullname, User.email, User.password).all()
+    #data = [a, b, c]
+    data = d
+    return data
 
 def save_userORM(username, fullname, email, password):
     engine = create_engine('sqlite:///sqlalchemy_users.db')
@@ -54,7 +59,7 @@ def login():
     elif request.method == 'POST':
         user_login = request.form.get('username')			#User from web
         pass_login = request.form.get('password')			#Pass from web
-        data = get_user()						#Get all the content of the database
+        data = get_userORM()						#Get all the content of the database
         for info in data:						#Iterate "usercontent" for "usercontent" to all the database content
             (username,fullname,email,password) = info
             if (username == user_login and password == pass_login):	#If the user and pass from the web matches with one "usercontent" of the database:
