@@ -7,16 +7,12 @@ from sqlalchemy_declarative import User, Base
 
 app = Flask(__name__)
 
+
 def get_userORM():
     engine = create_engine('sqlite:///sqlalchemy_users.db', echo=True)
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
-    a = session.query(User.username.label('username_label')).all()
-    b = session.query(User.fullname.label('fullname_label')).all()
-    c = session.query(User.email.label('e_label')).all()
-    d = session.query(User.username, User.fullname, User.email, User.password).all()
-    #data = [a, b, c]
-    data = d
+    data = session.query(User.username, User.fullname, User.email, User.password).all()
     return data
 
 def save_userORM(username, fullname, email, password):
