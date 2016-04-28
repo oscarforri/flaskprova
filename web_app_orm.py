@@ -7,7 +7,7 @@ from sqlalchemy_declarative import User, Base
 
 app = Flask(__name__)
 
-
+#Declare functions
 def get_userORM():
     engine = create_engine('sqlite:///sqlalchemy_users.db', echo=True)
     DBSession = sessionmaker(bind=engine)
